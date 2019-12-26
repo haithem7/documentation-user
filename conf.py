@@ -35,6 +35,7 @@ extensions = [
     'demo_link',
     'github_link',
     'embedded_video',
+    'sphinx_sitemap'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -412,6 +413,8 @@ def localize(app, pagename, templatename, context, doctree):
         (la.split('_')[0] if la != 'en' else 'x-default', _build_url(app.config.canonical_root, (la != 'en' and la or ''), pagename))
         for la in app.config.languages.split(',')
     ]
+    if not app.config.html_baseurl:
+        app.config["html_baseurl"] = app.config.canonical_root
 
 def canonicalize(app, pagename, templatename, context, doctree):
     """ Adds a 'canonical' URL for the current document in the rendering
